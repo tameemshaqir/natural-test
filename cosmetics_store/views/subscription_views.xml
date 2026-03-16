@@ -28,12 +28,12 @@
             <form>
                 <header>
                     <button name="action_activate" string="Activate" type="object"
-                            class="oe_highlight" attrs="{'invisible': [('status', '!=', 'draft')]}"/>
+                            class="oe_highlight" invisible="status != 'draft'"/>
                     <button name="action_pause" string="Pause" type="object"
-                            attrs="{'invisible': [('status', '!=', 'active')]}"/>
+                            invisible="status != 'active'"/>
                     <button name="action_cancel" string="Cancel" type="object"
                             class="btn-danger"
-                            attrs="{'invisible': [('status', 'in', ['cancelled', 'expired'])]}"/>
+                            invisible="status in ('cancelled', 'expired')"/>
                     <field name="status" widget="statusbar"/>
                 </header>
                 <sheet>

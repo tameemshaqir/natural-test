@@ -30,9 +30,9 @@
                 <header>
                     <button name="action_approve" string="Approve" type="object"
                             class="oe_highlight"
-                            attrs="{'invisible': [('status', '!=', 'pending')]}"/>
+                            invisible="status != 'pending'"/>
                     <button name="action_suspend" string="Suspend" type="object"
-                            attrs="{'invisible': [('status', '!=', 'active')]}"/>
+                            invisible="status != 'active'"/>
                     <field name="status" widget="statusbar"/>
                 </header>
                 <sheet>

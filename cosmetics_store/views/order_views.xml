@@ -34,7 +34,7 @@
                         <group>
                             <field name="affiliate_id"/>
                             <field name="is_subscription_order"/>
-                            <field name="subscription_id" attrs="{'invisible': [('is_subscription_order', '=', False)]}"/>
+                            <field name="subscription_id" invisible="not is_subscription_order"/>
                         </group>
                     </group>
                 </page>

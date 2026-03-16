@@ -9,10 +9,116 @@ A complete production-ready e-commerce platform for selling cosmetic products, f
 | Admin Dashboard | Odoo 17 | Product, order, customer, subscription management |
 | REST API | Odoo Controllers | Secure API layer with token authentication |
 | Mobile App | Flutter 3.x | Android app with Clean Architecture & BLoC |
-| Database | PostgreSQL | Data persistence |
+| Database | PostgreSQL 15 | Data persistence |
 | Payments | PayPal REST API | Secure payment processing |
 | Notifications | Firebase Cloud Messaging | Push notifications |
 | AI Features | Custom recommendation engine | Collaborative filtering & content-based |
+
+---
+
+## 🚀 How to Run
+
+### Prerequisites
+
+| Tool | Version | Required For |
+|------|---------|-------------|
+| [Docker](https://docs.docker.com/get-docker/) | 20+ | Backend (Odoo + PostgreSQL) |
+| [Docker Compose](https://docs.docker.com/compose/install/) | v2+ | Orchestrating services |
+| [Flutter](https://docs.flutter.dev/get-started/install) | 3.x | Mobile app (optional) |
+
+### Quick Start (Backend — Odoo + PostgreSQL)
+
+```bash
+# 1. Clone and enter the project
+git clone https://github.com/tameemshaqir/natural-test.git
+cd natural-test
+
+# 2. Run setup (creates .env, checks dependencies)
+bash scripts/setup.sh
+
+# 3. Start Odoo + PostgreSQL
+docker compose up -d
+
+# 4. Wait ~30 seconds, then open the admin dashboard
+#    http://localhost:8069
+#    Default login: admin / admin
+
+# 5. Install the Cosmetics Store module
+#    Go to Apps → Update Apps List → Search "Cosmetics Store" → Install
+#    OR run:
+bash scripts/install-module.sh
+```
+
+### Quick Start (Flutter Mobile App)
+
+```bash
+# 1. Update the API URL in the app
+#    Edit: flutter_app/lib/core/constants/app_constants.dart
+#    Set baseUrl to your Odoo server (e.g., http://10.0.2.2:8069 for Android emulator)
+
+# 2. Get dependencies and run
+cd flutter_app
+flutter pub get
+flutter run
+```
+
+### Using Make Commands
+
+```bash
+make setup           # Initial setup
+make up              # Start Odoo + PostgreSQL in background
+make down            # Stop all services
+make logs            # View Odoo logs
+make install-module  # Install the cosmetics_store module
+make shell           # Open shell in Odoo container
+make flutter-run     # Run the Flutter app
+make flutter-build   # Build release APK
+make status          # Show service status
+make clean           # Remove volumes and caches
+make help            # Show all commands
+```
+
+### Environment Configuration
+
+Copy `.env.example` to `.env` and configure:
+
+```bash
+cp .env.example .env
+```
+
+Key settings in `.env`:
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `POSTGRES_DB` | Database name | `cosmetics` |
+| `POSTGRES_PASSWORD` | Database password | `odoo_secret` |
+| `ODOO_PORT` | Odoo web port | `8069` |
+| `PAYPAL_CLIENT_ID` | PayPal API client ID | — |
+| `PAYPAL_MODE` | `sandbox` or `live` | `sandbox` |
+| `FIREBASE_SERVER_KEY` | FCM server key | — |
+| `API_SECRET` | Token signing secret | — |
+
+After configuring `.env`, set the same values in Odoo:
+**Settings → Technical → System Parameters** (see [Deployment Guide](docs/DEPLOYMENT_GUIDE.md#step-9-configure-system-parameters)).
+
+### Architecture
+
+```
+┌──────────────┐     HTTPS/REST      ┌──────────────────┐
+│ Flutter App   │ ──────────────────► │ Odoo 17          │
+│ (Android)     │ ◄────────────────── │ (Port 8069)      │
+└──────────────┘     JSON API         │                  │
+                                      │  cosmetics_store │
+                                      │  custom module   │
+                                      └────────┬─────────┘
+                                               │
+                                      ┌────────▼─────────┐
+                                      │ PostgreSQL 15     │
+                                      │ (Port 5432)       │
+                                      └──────────────────┘
+```
+
+---
 
 ## Project Structure
 
@@ -36,6 +142,20 @@ A complete production-ready e-commerce platform for selling cosmetic products, f
 │   │   ├── services/         # API, Auth, Cart services
 │   │   └── main.dart         # App entry point
 │   └── pubspec.yaml
+│
+├── config/                   # Configuration files
+│   └── odoo.conf             # Odoo server configuration
+│
+├── scripts/                  # Automation scripts
+│   ├── setup.sh              # Initial project setup
+│   ├── start-backend.sh      # Start Odoo + PostgreSQL
+│   ├── stop-backend.sh       # Stop services
+│   ├── install-module.sh     # Install/update Odoo module
+│   └── run-flutter.sh        # Run Flutter app
+│
+├── docker-compose.yml        # Docker orchestration
+├── Makefile                  # Convenience commands
+├── .env.example              # Environment template
 │
 └── docs/                     # Documentation
     ├── SYSTEM_ARCHITECTURE.md

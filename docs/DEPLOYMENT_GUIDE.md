@@ -1,8 +1,61 @@
 # Deployment Guide
 
-Step-by-step instructions to deploy the Cosmetics E-Commerce System on Ubuntu Server.
+Step-by-step instructions to deploy the Cosmetics E-Commerce System.
 
-## Prerequisites
+---
+
+## Option A: Docker Compose (Recommended for Development & Testing)
+
+The fastest way to run the system locally or on a server.
+
+### Prerequisites
+
+- Docker 20+ and Docker Compose v2+
+- 2GB+ RAM
+
+### Steps
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/tameemshaqir/natural-test.git
+cd natural-test
+
+# 2. Run setup
+bash scripts/setup.sh
+
+# 3. Edit .env with your credentials
+nano .env
+
+# 4. Start services
+docker compose up -d
+
+# 5. Wait ~30 seconds for initialization, then open:
+#    http://localhost:8069
+#    Login: admin / admin
+
+# 6. Install the module
+bash scripts/install-module.sh
+
+# 7. Verify: Go to Apps → search "Cosmetics Store" → should show as installed
+```
+
+### Useful Commands
+
+```bash
+docker compose logs -f odoo    # View Odoo logs
+docker compose ps              # Check service status
+docker compose restart         # Restart services
+docker compose down            # Stop services
+docker compose down -v         # Stop and delete all data
+```
+
+---
+
+## Option B: Manual Installation on Ubuntu Server (Production)
+
+For production deployments on a dedicated Ubuntu server.
+
+### Prerequisites
 
 - Ubuntu 22.04 LTS server
 - Minimum 4GB RAM, 2 CPU cores, 50GB storage

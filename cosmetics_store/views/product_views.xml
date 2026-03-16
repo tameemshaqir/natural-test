@@ -27,7 +27,7 @@
                     </group>
                     <group string="Subscription">
                         <field name="is_subscription_eligible"/>
-                        <field name="subscription_price" attrs="{'invisible': [('is_subscription_eligible', '=', False)]}"/>
+                        <field name="subscription_price" invisible="not is_subscription_eligible"/>
                     </group>
                 </page>
                 <page string="Shades" name="shades">

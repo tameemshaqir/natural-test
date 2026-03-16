@@ -45,6 +45,7 @@
         'web.assets_backend': [
             'cosmetics_store/static/src/css/dashboard.css',
             'cosmetics_store/static/src/js/dashboard.js',
+            'cosmetics_store/static/src/xml/dashboard_template.xml',
         ],
     },
     'installable': True,

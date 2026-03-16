@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Dashboard Action -->
+    <record id="action_cosmetics_dashboard" model="ir.actions.client">
+        <field name="name">Cosmetics Dashboard</field>
+        <field name="tag">cosmetics_dashboard</field>
+    </record>
+</odoo>

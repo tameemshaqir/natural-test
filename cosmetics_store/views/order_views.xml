@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sale Order Form Extension -->
+    <record id="sale_order_form_cosmetics" model="ir.ui.view">
+        <field name="name">sale.order.form.cosmetics</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="order_status" widget="statusbar"
+                       statusbar_visible="pending,confirmed,processing,shipped,delivered"/>
+            </xpath>
+            <xpath expr="//page[@name='order_lines']" position="after">
+                <page string="Shipping &amp; Payment" name="shipping_payment">
+                    <group>
+                        <group string="Shipping">
+                            <field name="shipping_method"/>
+                            <field name="tracking_number"/>
+                            <field name="tracking_url" widget="url"/>
+                            <field name="estimated_delivery"/>
+                            <field name="delivery_notes"/>
+                        </group>
+                        <group string="Payment">
+                            <field name="payment_method"/>
+                            <field name="payment_status"/>
+                            <field name="payment_reference"/>
+                        </group>
+                    </group>
+                    <group string="Discount &amp; Affiliate">
+                        <group>
+                            <field name="coupon_code"/>
+                            <field name="discount_amount"/>
+                        </group>
+                        <group>
+                            <field name="affiliate_id"/>
+                            <field name="is_subscription_order"/>
+                            <field name="subscription_id" attrs="{'invisible': [('is_subscription_order', '=', False)]}"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

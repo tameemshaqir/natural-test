@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Menu -->
+    <menuitem id="menu_cosmetics_root"
+              name="Cosmetics Store"
+              web_icon="cosmetics_store,static/description/icon.png"
+              sequence="10"/>
+
+    <!-- Dashboard -->
+    <menuitem id="menu_cosmetics_dashboard"
+              name="Dashboard"
+              parent="menu_cosmetics_root"
+              action="action_cosmetics_dashboard"
+              sequence="1"/>
+
+    <!-- Products -->
+    <menuitem id="menu_cosmetics_products"
+              name="Products"
+              parent="menu_cosmetics_root"
+              sequence="10"/>
+
+    <menuitem id="menu_cosmetics_products_all"
+              name="All Products"
+              parent="menu_cosmetics_products"
+              action="sale.product_template_action"
+              sequence="1"/>
+
+    <menuitem id="menu_cosmetics_brands"
+              name="Brands"
+              parent="menu_cosmetics_products"
+              action="action_cosmetics_brand"
+              sequence="2"/>
+
+    <menuitem id="menu_cosmetics_reviews"
+              name="Reviews"
+              parent="menu_cosmetics_products"
+              action="action_product_review"
+              sequence="3"/>
+
+    <!-- Orders -->
+    <menuitem id="menu_cosmetics_orders"
+              name="Orders"
+              parent="menu_cosmetics_root"
+              action="sale.action_quotations_with_onboarding"
+              sequence="20"/>
+
+    <!-- Customers -->
+    <menuitem id="menu_cosmetics_customers"
+              name="Customers"
+              parent="menu_cosmetics_root"
+              action="contacts.action_contacts"
+              sequence="30"/>
+
+    <!-- Subscriptions -->
+    <menuitem id="menu_cosmetics_subscriptions"
+              name="Subscriptions"
+              parent="menu_cosmetics_root"
+              sequence="40"/>
+
+    <menuitem id="menu_cosmetics_subscriptions_all"
+              name="All Subscriptions"
+              parent="menu_cosmetics_subscriptions"
+              action="action_cosmetics_subscription"
+              sequence="1"/>
+
+    <menuitem id="menu_cosmetics_subscription_plans"
+              name="Plans"
+              parent="menu_cosmetics_subscriptions"
+              action="action_cosmetics_subscription_plan"
+              sequence="2"/>
+
+    <!-- Marketing -->
+    <menuitem id="menu_cosmetics_marketing"
+              name="Marketing"
+              parent="menu_cosmetics_root"
+              sequence="50"/>
+
+    <menuitem id="menu_cosmetics_discounts"
+              name="Coupons &amp; Discounts"
+              parent="menu_cosmetics_marketing"
+              action="action_cosmetics_discount"
+              sequence="1"/>
+
+    <menuitem id="menu_cosmetics_affiliates"
+              name="Affiliates"
+              parent="menu_cosmetics_marketing"
+              action="action_cosmetics_affiliate"
+              sequence="2"/>
+</odoo>

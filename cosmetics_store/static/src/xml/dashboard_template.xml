@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="cosmetics_store.Dashboard">
+        <div class="cosmetics-dashboard">
+            <!-- Header -->
+            <div class="dashboard-header">
+                <div>
+                    <h1>Cosmetics Store Dashboard</h1>
+                    <p style="margin:0; opacity:0.9;">Overview of your store performance</p>
+                </div>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="kpi-cards">
+                <div class="kpi-card" t-on-click="openOrders" style="cursor:pointer">
+                    <div class="kpi-value" t-esc="state.totalOrders"/>
+                    <div class="kpi-label">Total Orders</div>
+                </div>
+                <div class="kpi-card" t-on-click="openOrders" style="cursor:pointer">
+                    <div class="kpi-value" t-esc="formatCurrency(state.totalRevenue)"/>
+                    <div class="kpi-label">Total Revenue</div>
+                </div>
+                <div class="kpi-card" t-on-click="openCustomers" style="cursor:pointer">
+                    <div class="kpi-value" t-esc="state.totalCustomers"/>
+                    <div class="kpi-label">Customers</div>
+                </div>
+                <div class="kpi-card" t-on-click="openProducts" style="cursor:pointer">
+                    <div class="kpi-value" t-esc="state.totalProducts"/>
+                    <div class="kpi-label">Products</div>
+                </div>
+                <div class="kpi-card" t-on-click="openSubscriptions" style="cursor:pointer">
+                    <div class="kpi-value" t-esc="state.activeSubscriptions"/>
+                    <div class="kpi-label">Active Subscriptions</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value" t-esc="state.pendingOrders"/>
+                    <div class="kpi-label">Pending Orders</div>
+                </div>
+            </div>
+
+            <!-- Recent Orders -->
+            <div class="recent-orders">
+                <h3>Recent Orders</h3>
+                <t t-foreach="state.recentOrders" t-as="order" t-key="order.id">
+                    <div class="order-row">
+                        <div>
+                            <strong t-esc="order.name"/>
+                            <br/>
+                            <small t-esc="order.partner_id[1]" style="color:#666"/>
+                        </div>
+                        <div>
+                            <span t-esc="formatCurrency(order.amount_total)"/>
+                        </div>
+                        <div>
+                            <span class="status-badge"
+                                  t-att-class="'status-badge ' + (order.order_status || 'pending')"
+                                  t-esc="order.order_status || 'pending'"/>
+                        </div>
+                    </div>
+                </t>
+                <div t-if="!state.recentOrders.length" style="text-align:center; padding:20px; color:#999;">
+                    No orders yet
+                </div>
+            </div>
+
+            <!-- Top Products -->
+            <div class="recent-orders" style="margin-top: 16px;">
+                <h3>Top Rated Products</h3>
+                <t t-foreach="state.topProducts" t-as="product" t-key="product.id">
+                    <div class="order-row">
+                        <div>
+                            <strong t-esc="product.name"/>
+                        </div>
+                        <div>
+                            <span t-esc="formatCurrency(product.list_price)"/>
+                        </div>
+                        <div>
+                            <span>★ <t t-esc="product.rating_average.toFixed(1)"/> (<t t-esc="product.review_count"/> reviews)</span>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+</templates>

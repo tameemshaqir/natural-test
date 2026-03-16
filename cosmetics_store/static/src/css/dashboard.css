@@ -1,0 +1,155 @@
+/* Cosmetics Store Dashboard Styles */
+
+.cosmetics-dashboard {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.cosmetics-dashboard .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%);
+    border-radius: 12px;
+    color: white;
+}
+
+.cosmetics-dashboard .dashboard-header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+}
+
+.cosmetics-dashboard .kpi-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.cosmetics-dashboard .kpi-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cosmetics-dashboard .kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.cosmetics-dashboard .kpi-card .kpi-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.cosmetics-dashboard .kpi-card .kpi-label {
+    font-size: 14px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cosmetics-dashboard .kpi-card .kpi-change {
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.cosmetics-dashboard .kpi-card .kpi-change.positive {
+    color: #4caf50;
+}
+
+.cosmetics-dashboard .kpi-card .kpi-change.negative {
+    color: #f44336;
+}
+
+.cosmetics-dashboard .chart-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.cosmetics-dashboard .chart-container {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.cosmetics-dashboard .chart-container h3 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.cosmetics-dashboard .recent-orders {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.cosmetics-dashboard .recent-orders h3 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.cosmetics-dashboard .order-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cosmetics-dashboard .order-row:last-child {
+    border-bottom: none;
+}
+
+.cosmetics-dashboard .status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.cosmetics-dashboard .status-badge.confirmed {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.cosmetics-dashboard .status-badge.processing {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+.cosmetics-dashboard .status-badge.shipped {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.cosmetics-dashboard .status-badge.delivered {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cosmetics-dashboard .chart-section {
+        grid-template-columns: 1fr;
+    }
+
+    .cosmetics-dashboard .kpi-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

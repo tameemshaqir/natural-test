@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Root Category -->
+        <record id="product_category_cosmetics" model="product.category">
+            <field name="name">Cosmetics</field>
+        </record>
+
+        <record id="product_category_skincare" model="product.category">
+            <field name="name">Skincare</field>
+            <field name="parent_id" ref="product_category_cosmetics"/>
+        </record>
+
+        <record id="product_category_makeup" model="product.category">
+            <field name="name">Makeup</field>
+            <field name="parent_id" ref="product_category_cosmetics"/>
+        </record>
+
+        <record id="product_category_haircare" model="product.category">
+            <field name="name">Haircare</field>
+            <field name="parent_id" ref="product_category_cosmetics"/>
+        </record>
+
+        <record id="product_category_fragrance" model="product.category">
+            <field name="name">Fragrance</field>
+            <field name="parent_id" ref="product_category_cosmetics"/>
+        </record>
+
+        <record id="product_category_bodycare" model="product.category">
+            <field name="name">Body Care</field>
+            <field name="parent_id" ref="product_category_cosmetics"/>
+        </record>
+
+        <record id="product_category_nailcare" model="product.category">
+            <field name="name">Nail Care</field>
+            <field name="parent_id" ref="product_category_cosmetics"/>
+        </record>
+
+        <record id="product_category_tools" model="product.category">
+            <field name="name">Tools &amp; Accessories</field>
+            <field name="parent_id" ref="product_category_cosmetics"/>
+        </record>
+
+        <!-- Skin Concerns -->
+        <record id="skin_concern_acne" model="cosmetics.skin.concern">
+            <field name="name">Acne</field>
+            <field name="description">Prone to breakouts and blemishes</field>
+        </record>
+
+        <record id="skin_concern_aging" model="cosmetics.skin.concern">
+            <field name="name">Anti-Aging</field>
+            <field name="description">Fine lines, wrinkles, and loss of elasticity</field>
+        </record>
+
+        <record id="skin_concern_dark_spots" model="cosmetics.skin.concern">
+            <field name="name">Dark Spots</field>
+            <field name="description">Hyperpigmentation and uneven skin tone</field>
+        </record>
+
+        <record id="skin_concern_dryness" model="cosmetics.skin.concern">
+            <field name="name">Dryness</field>
+            <field name="description">Dry, flaky, or dehydrated skin</field>
+        </record>
+
+        <record id="skin_concern_sensitivity" model="cosmetics.skin.concern">
+            <field name="name">Sensitivity</field>
+            <field name="description">Easily irritated or reactive skin</field>
+        </record>
+
+        <record id="skin_concern_pores" model="cosmetics.skin.concern">
+            <field name="name">Large Pores</field>
+            <field name="description">Enlarged or visible pores</field>
+        </record>
+    </data>
+</odoo>

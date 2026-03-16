@@ -61,7 +61,13 @@ def _verify_token(token):
 def authenticate(func):
     """Decorator to require authentication for API endpoints."""
     def wrapper(*args, **kwargs):
-        token = request.httprequest.headers.get('Authorization', '').replace('Bearer ', '')
+        auth_header = request.httprequest.headers.get('Authorization', '')
+        if not auth_header.startswith('Bearer '):
+            return Response(
+                json.dumps({'error': 'Authentication required'}),
+                status=401, content_type='application/json'
+            )
+        token = auth_header[7:]
         if not token:
             return Response(
                 json.dumps({'error': 'Authentication required'}),
@@ -95,7 +101,7 @@ class AuthController(http.Controller):
     def register(self, **kwargs):
         """Register a new customer account."""
         try:
-            data = json.loads(request.httprequest.data)
+            data = request.jsonrequest
             name = data.get('name')
             email = data.get('email')
             password = data.get('password')
@@ -140,7 +146,7 @@ class AuthController(http.Controller):
     def login(self, **kwargs):
         """Authenticate user and return token."""
         try:
-            data = json.loads(request.httprequest.data)
+            data = request.jsonrequest
             email = data.get('email')
             password = data.get('password')
 
@@ -178,7 +184,10 @@ class AuthController(http.Controller):
                 methods=['GET'], csrf=False, cors='*')
     def get_profile(self, **kwargs):
         """Get current user profile."""
-        token = request.httprequest.headers.get('Authorization', '').replace('Bearer ', '')
+        auth_header = request.httprequest.headers.get('Authorization', '')
+        if not auth_header.startswith('Bearer '):
+            return {'error': 'Authentication required.'}
+        token = auth_header[7:]
         user_id = _verify_token(token)
         if not user_id:
             return {'error': 'Authentication required.'}

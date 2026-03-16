@@ -63,7 +63,7 @@ class CartController(http.Controller):
     def add_to_cart(self, **kwargs):
         """Add product to cart."""
         try:
-            data = json.loads(request.httprequest.data)
+            data = request.jsonrequest
             product_id = data.get('product_id')
             quantity = data.get('quantity', 1)
 
@@ -107,7 +107,7 @@ class CartController(http.Controller):
     def update_cart_item(self, **kwargs):
         """Update cart item quantity."""
         try:
-            data = json.loads(request.httprequest.data)
+            data = request.jsonrequest
             line_id = data.get('line_id')
             quantity = data.get('quantity')
 
@@ -138,7 +138,7 @@ class CartController(http.Controller):
     def remove_from_cart(self, **kwargs):
         """Remove item from cart."""
         try:
-            data = json.loads(request.httprequest.data)
+            data = request.jsonrequest
             line_id = data.get('line_id')
 
             if not line_id:
@@ -159,7 +159,7 @@ class CartController(http.Controller):
     def apply_coupon(self, **kwargs):
         """Apply coupon code to cart."""
         try:
-            data = json.loads(request.httprequest.data)
+            data = request.jsonrequest
             coupon_code = data.get('coupon_code', '').strip()
 
             if not coupon_code:

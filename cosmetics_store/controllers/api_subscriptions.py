@@ -71,7 +71,7 @@ class SubscriptionController(http.Controller):
     def create_subscription(self, **kwargs):
         """Create a new subscription."""
         try:
-            data = json.loads(request.httprequest.data)
+            data = request.jsonrequest
             plan_id = data.get('plan_id')
 
             if not plan_id:

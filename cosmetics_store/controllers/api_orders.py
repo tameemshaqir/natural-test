@@ -17,7 +17,7 @@ class OrderController(http.Controller):
     def checkout(self, **kwargs):
         """Process checkout from cart."""
         try:
-            data = json.loads(request.httprequest.data)
+            data = request.jsonrequest
             payment_method = data.get('payment_method', 'paypal')
             shipping_method = data.get('shipping_method', 'standard')
             shipping_address = data.get('shipping_address', {})
@@ -166,7 +166,7 @@ class OrderController(http.Controller):
     def process_payment(self, order_id, **kwargs):
         """Process PayPal payment for an order."""
         try:
-            data = json.loads(request.httprequest.data)
+            data = request.jsonrequest
             payment_id = data.get('payment_id')
             payer_id = data.get('payer_id')
 

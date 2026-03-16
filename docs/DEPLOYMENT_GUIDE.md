@@ -23,20 +23,23 @@ cd natural-test
 # 2. Run setup
 bash scripts/setup.sh
 
-# 3. Edit .env with your credentials
+# 3. Edit .env with your credentials (optional)
 nano .env
 
-# 4. Start services
+# 4. Start PostgreSQL
+docker compose up -d db
+
+# 5. Initialize database with the module (takes ~1 minute)
+bash scripts/install-module.sh
+
+# 6. Start the Odoo server
 docker compose up -d
 
-# 5. Wait ~30 seconds for initialization, then open:
+# 7. Wait ~15 seconds for startup, then open:
 #    http://localhost:8069
 #    Login: admin / admin
 
-# 6. Install the module
-bash scripts/install-module.sh
-
-# 7. Verify: Go to Apps → search "Cosmetics Store" → should show as installed
+# 8. Click the hamburger menu → "Cosmetics Store" to access the dashboard
 ```
 
 ### Useful Commands

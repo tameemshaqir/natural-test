@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 # =============================================================
-# Install the Cosmetics Store module into Odoo
+# Initialize the database and install the Cosmetics Store module
 # =============================================================
-# Run this after the Odoo container is up and the database exists.
-# It triggers Odoo to install/update the cosmetics_store module.
+# Run this after starting the PostgreSQL container with:
+#   docker compose up -d db
+#
+# This creates the 'cosmetics' database and installs all required
+# modules. It runs Odoo once in init mode (no HTTP server) and exits.
 # =============================================================
 set -euo pipefail
 
@@ -20,8 +23,9 @@ fi
 
 DB_NAME="${POSTGRES_DB:-cosmetics}"
 
-echo "Installing/Updating Cosmetics Store module..."
+echo "Initializing database and installing Cosmetics Store module..."
 echo "Database: $DB_NAME"
+echo "This may take 1-2 minutes..."
 echo ""
 
 if command -v docker compose &> /dev/null; then
@@ -33,14 +37,20 @@ else
     exit 1
 fi
 
-# Run Odoo install/update command
-$COMPOSE run --rm odoo \
-    odoo --config=/etc/odoo/odoo.conf \
+# Run Odoo init command
+$COMPOSE run --rm odoo odoo \
+    --config=/etc/odoo/odoo.conf \
     --database="$DB_NAME" \
     --init=cosmetics_store \
     --stop-after-init \
-    --no-http
+    --no-http \
+    --without-demo=all
 
 echo ""
 echo "✅ Module installed successfully!"
-echo "Start the backend with: scripts/start-backend.sh -d"
+echo ""
+echo "Start the Odoo server with:"
+echo "  docker compose up -d"
+echo ""
+echo "Then open http://localhost:8069"
+echo "Login: admin / admin"

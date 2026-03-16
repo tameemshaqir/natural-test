@@ -36,17 +36,27 @@ cd natural-test
 # 2. Run setup (creates .env, checks dependencies)
 bash scripts/setup.sh
 
-# 3. Start Odoo + PostgreSQL
+# 3. Start PostgreSQL
+docker compose up -d db
+
+# 4. Wait for DB to be ready (~10 seconds), then initialize the
+#    database with the Cosmetics Store module (takes ~1 minute):
+docker compose run --rm odoo odoo \
+    --config=/etc/odoo/odoo.conf \
+    --database=cosmetics \
+    --init=cosmetics_store \
+    --stop-after-init \
+    --no-http \
+    --without-demo=all
+
+# 5. Start the Odoo server
 docker compose up -d
 
-# 4. Wait ~30 seconds, then open the admin dashboard
+# 6. Open the admin dashboard (wait ~15 seconds for startup)
 #    http://localhost:8069
-#    Default login: admin / admin
+#    Login: admin / admin
 
-# 5. Install the Cosmetics Store module
-#    Go to Apps → Update Apps List → Search "Cosmetics Store" → Install
-#    OR run:
-bash scripts/install-module.sh
+# 7. Click the hamburger menu → "Cosmetics Store" to see the dashboard
 ```
 
 ### Quick Start (Flutter Mobile App)

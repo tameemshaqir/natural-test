@@ -37,7 +37,7 @@ class RecommendationController(http.Controller):
             return {'recommendations': rec_list}
         except Exception as e:
             _logger.exception("Error getting recommendations")
-            return {'error': str(e)}
+            return {'error': 'An error occurred. Please try again.'}
 
     @http.route('/api/v1/recommendations/skincare', type='json', auth='none',
                 methods=['GET'], csrf=False, cors='*')
@@ -53,7 +53,7 @@ class RecommendationController(http.Controller):
             return {'routine': routine}
         except Exception as e:
             _logger.exception("Error getting skincare suggestions")
-            return {'error': str(e)}
+            return {'error': 'An error occurred. Please try again.'}
 
     @http.route('/api/v1/recommendations/trending', type='http', auth='none',
                 methods=['GET'], csrf=False, cors='*')
@@ -80,4 +80,4 @@ class RecommendationController(http.Controller):
             return json_response({'trending': product_list})
         except Exception as e:
             _logger.exception("Error fetching trending products")
-            return json_response({'error': str(e)}, status=500)
+            return json_response({'error': 'Internal server error'}, status=500)

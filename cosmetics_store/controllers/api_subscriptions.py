@@ -32,7 +32,7 @@ class SubscriptionController(http.Controller):
             return json_response({'plans': plan_list})
         except Exception as e:
             _logger.exception("Error fetching subscription plans")
-            return json_response({'error': str(e)}, status=500)
+            return json_response({'error': 'Internal server error'}, status=500)
 
     @http.route('/api/v1/subscriptions', type='json', auth='none',
                 methods=['GET'], csrf=False, cors='*')
@@ -63,7 +63,7 @@ class SubscriptionController(http.Controller):
             return {'subscriptions': sub_list}
         except Exception as e:
             _logger.exception("Error fetching subscriptions")
-            return {'error': str(e)}
+            return {'error': 'An error occurred. Please try again.'}
 
     @http.route('/api/v1/subscriptions/create', type='json', auth='none',
                 methods=['POST'], csrf=False, cors='*')
@@ -98,7 +98,7 @@ class SubscriptionController(http.Controller):
             }
         except Exception as e:
             _logger.exception("Error creating subscription")
-            return {'error': str(e)}
+            return {'error': 'An error occurred. Please try again.'}
 
     @http.route('/api/v1/subscriptions/<int:sub_id>/cancel', type='json', auth='none',
                 methods=['POST'], csrf=False, cors='*')
@@ -120,4 +120,4 @@ class SubscriptionController(http.Controller):
             }
         except Exception as e:
             _logger.exception("Error cancelling subscription")
-            return {'error': str(e)}
+            return {'error': 'An error occurred. Please try again.'}

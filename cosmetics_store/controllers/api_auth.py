@@ -139,7 +139,7 @@ class AuthController(http.Controller):
             }
         except Exception as e:
             _logger.exception("Registration error")
-            return {'error': str(e)}
+            return {'error': 'Registration failed. Please try again.'}
 
     @http.route('/api/v1/auth/login', type='json', auth='none',
                 methods=['POST'], csrf=False, cors='*')

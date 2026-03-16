@@ -97,7 +97,7 @@ class ProductController(http.Controller):
             })
         except Exception as e:
             _logger.exception("Error fetching products")
-            return json_response({'error': str(e)}, status=500)
+            return json_response({'error': 'Internal server error'}, status=500)
 
     @http.route('/api/v1/products/<int:product_id>', type='http', auth='none',
                 methods=['GET'], csrf=False, cors='*')
@@ -155,7 +155,7 @@ class ProductController(http.Controller):
             return json_response(data)
         except Exception as e:
             _logger.exception("Error fetching product detail")
-            return json_response({'error': str(e)}, status=500)
+            return json_response({'error': 'Internal server error'}, status=500)
 
     @http.route('/api/v1/products/search', type='http', auth='none',
                 methods=['GET'], csrf=False, cors='*')
@@ -203,7 +203,7 @@ class ProductController(http.Controller):
             })
         except Exception as e:
             _logger.exception("Error searching products")
-            return json_response({'error': str(e)}, status=500)
+            return json_response({'error': 'Internal server error'}, status=500)
 
     @http.route('/api/v1/categories', type='http', auth='none',
                 methods=['GET'], csrf=False, cors='*')
@@ -232,4 +232,4 @@ class ProductController(http.Controller):
             })
         except Exception as e:
             _logger.exception("Error fetching categories")
-            return json_response({'error': str(e)}, status=500)
+            return json_response({'error': 'Internal server error'}, status=500)

@@ -85,7 +85,7 @@ class OrderController(http.Controller):
             }
         except Exception as e:
             _logger.exception("Checkout error")
-            return {'error': str(e)}
+            return {'error': 'An error occurred. Please try again.'}
 
     @http.route('/api/v1/orders', type='json', auth='none',
                 methods=['GET'], csrf=False, cors='*')
@@ -116,7 +116,7 @@ class OrderController(http.Controller):
             return {'orders': order_list}
         except Exception as e:
             _logger.exception("Error fetching orders")
-            return {'error': str(e)}
+            return {'error': 'An error occurred. Please try again.'}
 
     @http.route('/api/v1/orders/<int:order_id>', type='json', auth='none',
                 methods=['GET'], csrf=False, cors='*')
@@ -158,7 +158,7 @@ class OrderController(http.Controller):
             }
         except Exception as e:
             _logger.exception("Error fetching order detail")
-            return {'error': str(e)}
+            return {'error': 'An error occurred. Please try again.'}
 
     @http.route('/api/v1/orders/<int:order_id>/payment', type='json', auth='none',
                 methods=['POST'], csrf=False, cors='*')
@@ -191,4 +191,4 @@ class OrderController(http.Controller):
             }
         except Exception as e:
             _logger.exception("Payment processing error")
-            return {'error': str(e)}
+            return {'error': 'An error occurred. Please try again.'}

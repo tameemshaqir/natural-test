@@ -55,7 +55,7 @@ class CartController(http.Controller):
             }
         except Exception as e:
             _logger.exception("Error fetching cart")
-            return {'error': str(e)}
+            return {'error': 'An error occurred. Please try again.'}
 
     @http.route('/api/v1/cart/add', type='json', auth='none',
                 methods=['POST'], csrf=False, cors='*')
@@ -99,7 +99,7 @@ class CartController(http.Controller):
             }
         except Exception as e:
             _logger.exception("Error adding to cart")
-            return {'error': str(e)}
+            return {'error': 'An error occurred. Please try again.'}
 
     @http.route('/api/v1/cart/update', type='json', auth='none',
                 methods=['PUT'], csrf=False, cors='*')
@@ -130,7 +130,7 @@ class CartController(http.Controller):
                 }
         except Exception as e:
             _logger.exception("Error updating cart")
-            return {'error': str(e)}
+            return {'error': 'An error occurred. Please try again.'}
 
     @http.route('/api/v1/cart/remove', type='json', auth='none',
                 methods=['DELETE'], csrf=False, cors='*')
@@ -151,7 +151,7 @@ class CartController(http.Controller):
             return {'success': True, 'message': 'Item removed from cart.'}
         except Exception as e:
             _logger.exception("Error removing from cart")
-            return {'error': str(e)}
+            return {'error': 'An error occurred. Please try again.'}
 
     @http.route('/api/v1/cart/coupon', type='json', auth='none',
                 methods=['POST'], csrf=False, cors='*')
@@ -190,4 +190,4 @@ class CartController(http.Controller):
             }
         except Exception as e:
             _logger.exception("Error applying coupon")
-            return {'error': str(e)}
+            return {'error': 'An error occurred. Please try again.'}
